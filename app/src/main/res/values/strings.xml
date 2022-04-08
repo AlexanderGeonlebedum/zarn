@@ -7,12 +7,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
 
-    <string name="menu_schedule">Schedule</string>
-    <string name="menu_appointment">Appointment</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
@@ -25,4 +20,18 @@
 
     <string name="client_name">Client Name</string>
     <string name="client_number">Client Phone Number</string>
+    <string name="dateOfBooking">Booking Date</string>
+    <string name="bookButton">Confirm</string>
+
+
+    <string name="menu_delete">Delete</string>
+    <string name="menu_cancel">Cancel</string>
+    <string name="menu_schedule">Schedule</string>
+    <string name="menu_appointment">Appointment</string>
+
+    <string name="ClientNameValidation">Please enter a name</string>
+    <string name="ClientAddressValidation">Please enter an address</string>
+    <string name="ClientNumberValidation">Please enter contact</string>
+
+
 </resources>

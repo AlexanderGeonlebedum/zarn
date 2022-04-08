@@ -7,6 +7,8 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context=".ui.schedule.ScheduleFragment">
 
+
+
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="389dp"
@@ -26,6 +28,8 @@ tools:context=".ui.schedule.ScheduleFragment">
 
     </RelativeLayout>
 
+
+
     <EditText
         android:id="@+id/clientAddName"
         android:layout_width="410dp"
@@ -42,22 +46,38 @@ tools:context=".ui.schedule.ScheduleFragment">
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp" />
 
+    <EditText
+        android:id="@+id/clientAddNumber"
+        android:layout_width="410dp"
+        android:layout_height="66dp"
+        android:layout_margin="8dp"
+        android:layout_marginTop="16dp"
+        android:autofillHints=""
+        android:hint="@string/client_number"
+        android:inputType="number"
+        android:maxLength="25"
+        android:maxLines="1"
+        android:padding="8dp"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@+id/clientAddName"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp" />
+
     <RadioGroup
         android:id="@+id/chosenAppointments"
-        android:layout_width="400dp"
-        android:layout_height="290dp"
-        android:layout_below="@+id/clientAddName"
+        android:layout_width="406dp"
+        android:layout_height="289dp"
+        android:layout_below="@+id/clientAddNumber"
         android:layout_alignParentStart="true"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/relativeLayout"
-        app:layout_constraintVertical_bias="0.422">
+        app:layout_constraintTop_toBottomOf="@+id/clientAddNumber"
+        app:layout_constraintVertical_bias="0.0">
 
         <RadioButton
             android:id="@+id/ClassicFullSet"
@@ -101,5 +121,34 @@ tools:context=".ui.schedule.ScheduleFragment">
             android:checked="false"
             android:text="@string/removal" />
     </RadioGroup>
+
+<!--    <DatePicker-->
+<!--        android:id="@+id/datePicker"-->
+<!--        android:layout_width="406dp"-->
+<!--        android:layout_height="172dp"-->
+<!--        android:layout_margin="8dp"-->
+<!--        android:calendarViewShown="false"-->
+<!--        android:datePickerMode="spinner"-->
+<!--        android:hint="@string/dateOfBooking"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/chosenAppointments"-->
+<!--        tools:ignore="MissingConstraints"-->
+<!--        tools:layout_editor_absoluteX="0dp" />-->
+
+    <Button
+        android:id="@+id/bookButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/bookButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chosenAppointments"
+        app:layout_constraintVertical_bias="0.892" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
