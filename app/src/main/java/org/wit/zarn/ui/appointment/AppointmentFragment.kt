@@ -1,60 +1,85 @@
 package org.wit.zarn.ui.appointment
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
+import androidx.recyclerview.widget.LinearLayoutManager
 import org.wit.zarn.R
+import org.wit.zarn.adapters.ZarnAdapter
+import org.wit.zarn.adapters.ZarnClickListener
+import org.wit.zarn.databinding.FragmentAppointmentBinding
+import org.wit.zarn.main.ZarnApp
+import org.wit.zarn.models.ZarnModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [AppointmentFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class AppointmentFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class AppointmentFragment : Fragment(), ZarnClickListener {
+
+    lateinit var app: ZarnApp
+    private var _binding : FragmentAppointmentBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var appointmentViewModel: AppointmentViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_appointment, container, false)
+        _binding = FragmentAppointmentBinding.inflate(inflater, container, false)
+        val root = binding.root
+
+        binding.recyclerView.layoutManager = LinearLayoutManager(activity)
+        appointmentViewModel = ViewModelProvider(this).get(AppointmentViewModel::class.java)
+        appointmentViewModel.observableZarnsList.observe(viewLifecycleOwner, Observer {
+            zarns ->
+            zarns?.let {render(zarns)}
+        })
+        return root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AppointmentFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AppointmentFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_appointment, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(item,
+            requireView().findNavController()) || super.onOptionsItemSelected(item)
+    }
+
+    private fun render(zarnsList: List<ZarnModel>){
+        binding.recyclerView.adapter = ZarnAdapter(zarnsList,this)
+        if (zarnsList.isEmpty()){
+            binding.recyclerView.visibility = View.GONE
+        }else{
+            binding.recyclerView.visibility = View.VISIBLE
+        }
+    }
+
+
+    override fun onZarnClick(zarn: ZarnModel) {
+//       val action = AppointmentFragmentDirections.actionAppointmentFragmentToZarnDetailFragment(zarn.id)
+//        findNavController().navigate(action)
+    }
+
+
+
+    override fun onResume() {
+        super.onResume()
+        appointmentViewModel.load()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

@@ -22,6 +22,7 @@
     <string name="client_number">Client Phone Number</string>
     <string name="dateOfBooking">Booking Date</string>
     <string name="bookButton">Confirm</string>
+    <string name="action_schedule">Schedule</string>
 
 
     <string name="menu_delete">Delete</string>
@@ -32,6 +33,7 @@
     <string name="ClientNameValidation">Please enter a name</string>
     <string name="ClientAddressValidation">Please enter an address</string>
     <string name="ClientNumberValidation">Please enter contact</string>
-
+    <string name="bookingError"> Booking Error</string>
+    <string name="appointment">Appointment</string>
 
 </resources>
