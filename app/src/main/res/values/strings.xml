@@ -36,4 +36,6 @@
     <string name="bookingError"> Booking Error</string>
     <string name="appointment">Appointment</string>
 
+
+    <string name="messageLoading">Please Wait while the bookings are Loading...</string>
 </resources>

@@ -12,7 +12,7 @@ interface ZarnClickListener {
     fun onZarnClick(zarn: ZarnModel)
 }
 
-class ZarnAdapter constructor(private var zarns: List<ZarnModel>,
+class ZarnAdapter constructor(private var zarns: ArrayList<ZarnModel>,
                               private val listener: ZarnClickListener)
     : RecyclerView.Adapter<ZarnAdapter.MainHolder>() {
 
@@ -28,14 +28,19 @@ class ZarnAdapter constructor(private var zarns: List<ZarnModel>,
         holder.bind(zarn,listener)
     }
 
+    fun removeAt(position: Int) {
+        zarns.removeAt(position)
+        notifyItemRemoved(position)
+    }
 
     override fun getItemCount(): Int = zarns.size
 
     inner class MainHolder(val binding : CardZarnBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(zarn: ZarnModel, listener: ZarnClickListener) {
+            binding.root.tag = zarn._id
         binding.zarn = zarn
-        binding.imageIcon.setImageResource(R.mipmap.ic_launcher_round)
+        binding.imageIcon.setImageResource(R.mipmap.client_icon)
         binding.root.setOnClickListener { listener.onZarnClick(zarn) }
         binding.executePendingBindings()
     }

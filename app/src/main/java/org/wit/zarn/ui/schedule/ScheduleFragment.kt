@@ -17,6 +17,7 @@ import org.wit.zarn.R
 import org.wit.zarn.databinding.FragmentScheduleBinding
 import org.wit.zarn.main.ZarnApp
 import org.wit.zarn.models.ZarnModel
+import org.wit.zarn.ui.appointment.AppointmentViewModel
 
 
 class ScheduleFragment : Fragment() {
@@ -96,7 +97,11 @@ class ScheduleFragment : Fragment() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        val appointmentViewModel = ViewModelProvider(this).get(AppointmentViewModel::class.java)
 
+    }
 
 
     override fun onDestroyView() {
