@@ -10,7 +10,8 @@ data class ZarnModel (var _id: String = "N/A",
                       val clientAddName: String,
                       val clientAddNumber: Int = 0,
                       val message: String = "n/a",
-                      val chosenAppointments: String = "N/A") : Parcelable
+                      val chosenAppointments: String = "N/A",
+                      val email: String = "zarn@gmail.com") : Parcelable
 
 
 

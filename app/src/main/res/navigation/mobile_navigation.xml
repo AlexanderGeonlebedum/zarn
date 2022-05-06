@@ -9,11 +9,27 @@
         android:id="@+id/scheduleFragment"
         android:name="org.wit.zarn.ui.schedule.ScheduleFragment"
         android:label="@string/menu_schedule"
-        tools:layout="@layout/fragment_schedule" />
+        tools:layout="@layout/fragment_schedule">
+
+        <action
+            android:id="@+id/action_scheduleFragment_to_appointmentFragment"
+            app:destination="@id/appointmentFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
     <fragment
         android:id="@+id/appointmentFragment"
         android:name="org.wit.zarn.ui.appointment.AppointmentFragment"
         android:label="@string/menu_appointment"
-        tools:layout="@layout/fragment_appointment" />
+        tools:layout="@layout/fragment_appointment" >
+        <action
+            android:id="@+id/action_appointmentFragment_to_scheduleFragment"
+            app:destination="@id/scheduleFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"/>
+<!--        <action-->
+<!--            android:id="@+id/action_appointmentFragment_to_scheduleDetailedFragment"-->
+<!--            app:destination="@id/scheduleDetailFragment" />-->
+    </fragment>
 
 </navigation>

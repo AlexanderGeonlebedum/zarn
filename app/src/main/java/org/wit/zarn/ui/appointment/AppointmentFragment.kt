@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -17,18 +18,18 @@ import org.wit.zarn.adapters.ZarnClickListener
 import org.wit.zarn.databinding.FragmentAppointmentBinding
 import org.wit.zarn.main.ZarnApp
 import org.wit.zarn.models.ZarnModel
-import org.wit.zarn.utils.SwipeToDeleteCallback
-import org.wit.zarn.utils.createLoader
-import org.wit.zarn.utils.hideLoader
-import org.wit.zarn.utils.showLoader
+import org.wit.zarn.ui.auth.LoggedInViewModel
+import org.wit.zarn.utils.*
 
 class AppointmentFragment : Fragment(), ZarnClickListener {
 
     lateinit var app: ZarnApp
     private var _binding : FragmentAppointmentBinding? = null
     private val binding get() = _binding!!
-    private lateinit var appointmentViewModel: AppointmentViewModel
+//    private lateinit var appointmentViewModel: AppointmentViewModel
     lateinit var loader : AlertDialog
+    private lateinit var appointmentViewModel: AppointmentViewModel
+    private val loggedInViewModel : LoggedInViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,12 +66,22 @@ class AppointmentFragment : Fragment(), ZarnClickListener {
                 showLoader(loader,"Deleting Bookings")
                 val adapter = binding.recyclerView.adapter as ZarnAdapter
                 adapter.removeAt(viewHolder.adapterPosition)
-                appointmentViewModel.delete(viewHolder.itemView.tag as String)
+                appointmentViewModel.delete(appointmentViewModel.liveFirebaseUser.value?.email!!,
+                    (viewHolder.itemView.tag as ZarnModel)._id)
                 hideLoader(loader)
             }
         }
         val itemTouchDeleteHelper = ItemTouchHelper(swipeDeleteHandler)
         itemTouchDeleteHelper.attachToRecyclerView(binding.recyclerView)
+
+        val swipeEditHandler = object : SwipeToEditCallback(requireContext()) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                onZarnClick(viewHolder.itemView.tag as ZarnModel)
+            }
+        }
+        val itemTouchEditHelper = ItemTouchHelper(swipeEditHandler)
+        itemTouchEditHelper.attachToRecyclerView(binding.recyclerView)
+
 
         return root
     }
@@ -86,7 +97,7 @@ class AppointmentFragment : Fragment(), ZarnClickListener {
             requireView().findNavController()) || super.onOptionsItemSelected(item)
     }
 
-    private fun render(zarnsList: List<ZarnModel>){
+    private fun render(zarnsList: ArrayList<ZarnModel>){
         binding.recyclerView.adapter = ZarnAdapter(zarnsList,this)
         if (zarnsList.isEmpty()){
             binding.recyclerView.visibility = View.GONE
@@ -116,7 +127,14 @@ class AppointmentFragment : Fragment(), ZarnClickListener {
 
     override fun onResume() {
         super.onResume()
-        appointmentViewModel.load()
+        showLoader(loader,"Downloading Zarns")
+        loggedInViewModel.liveFirebaseUser.observe(viewLifecycleOwner, Observer { firebaseUser ->
+            if (firebaseUser != null) {
+                appointmentViewModel.liveFirebaseUser.value = firebaseUser
+                appointmentViewModel.load()
+            }
+        })
+
     }
 
     override fun onDestroyView() {

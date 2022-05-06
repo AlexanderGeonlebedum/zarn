@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "152917495299",
+    "project_id": "zarn-82adb",
+    "storage_bucket": "zarn-82adb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:152917495299:android:816cd592aed06c2c9e0836",
+        "android_client_info": {
+          "package_name": "org.wit.zarn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "152917495299-ustt0t4cmm533mv7sln6sd9utk9eh6pa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJQGv68Zfl2B7oz2H0v4EkIoj3m5w6uA0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "152917495299-ustt0t4cmm533mv7sln6sd9utk9eh6pa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

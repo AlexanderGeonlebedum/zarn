@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -18,6 +19,7 @@ import org.wit.zarn.databinding.FragmentScheduleBinding
 import org.wit.zarn.main.ZarnApp
 import org.wit.zarn.models.ZarnModel
 import org.wit.zarn.ui.appointment.AppointmentViewModel
+import org.wit.zarn.ui.auth.LoggedInViewModel
 
 
 class ScheduleFragment : Fragment() {
@@ -25,6 +27,9 @@ class ScheduleFragment : Fragment() {
     private var _binding : FragmentScheduleBinding? =null
     private val binding get() = _binding!!
     private lateinit var scheduleViewModel: ScheduleViewModel
+    private val appointmentViewModel: AppointmentViewModel by activityViewModels()
+    private val loggedInViewModel : LoggedInViewModel by activityViewModels()
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,7 +70,7 @@ class ScheduleFragment : Fragment() {
             true -> {
                 view?.let {
 
-                    findNavController().popBackStack()
+                    //findNavController().popBackStack()
                 }
             }
             false -> Toast.makeText(context,getString(R.string.bookingError),Toast.LENGTH_LONG).show()
@@ -91,7 +96,8 @@ class ScheduleFragment : Fragment() {
                 else if(layout.chosenAppointments.checkedRadioButtonId == R.id.TouchUps)"Touch Ups"
                 else "Removal"
 
-                scheduleViewModel.addZarn(ZarnModel(chosenAppointments = chosenAppointments,clientAddName = name.toString(),clientAddNumber = contacts))
+                scheduleViewModel.addZarn(ZarnModel(chosenAppointments = chosenAppointments,clientAddName = name.toString(),clientAddNumber = contacts,
+                    email = loggedInViewModel.liveFirebaseUser.value?.email!!))
             }
         }
 

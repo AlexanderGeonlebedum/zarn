@@ -35,7 +35,8 @@ class ZarnAdapter constructor(private var zarns: ArrayList<ZarnModel>,
 
     override fun getItemCount(): Int = zarns.size
 
-    inner class MainHolder(val binding : CardZarnBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class MainHolder(val binding : CardZarnBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(zarn: ZarnModel, listener: ZarnClickListener) {
             binding.root.tag = zarn._id
