@@ -149,6 +149,6 @@ tools:context=".ui.schedule.ScheduleFragment">
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chosenAppointments"
-        app:layout_constraintVertical_bias="0.892" />
+        app:layout_constraintVertical_bias="0.134" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

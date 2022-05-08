@@ -26,7 +26,7 @@ class AppointmentFragment : Fragment(), ZarnClickListener {
     lateinit var app: ZarnApp
     private var _binding : FragmentAppointmentBinding? = null
     private val binding get() = _binding!!
-//    private lateinit var appointmentViewModel: AppointmentViewModel
+    //    private lateinit var appointmentViewModel: AppointmentViewModel
     lateinit var loader : AlertDialog
     private lateinit var appointmentViewModel: AppointmentViewModel
     private val loggedInViewModel : LoggedInViewModel by activityViewModels()
@@ -48,11 +48,11 @@ class AppointmentFragment : Fragment(), ZarnClickListener {
         appointmentViewModel = ViewModelProvider(this).get(AppointmentViewModel::class.java)
         showLoader(loader,"Downloading Bokings")
         appointmentViewModel.observableZarnsList.observe(viewLifecycleOwner, Observer {
-            zarns ->
+                zarns ->
             zarns?.let {
                 render(zarns as ArrayList<ZarnModel>)
-            hideLoader(loader)
-            checkSwipeRefresh()
+                hideLoader(loader)
+                checkSwipeRefresh()
             }
         })
 //        binding.fab.setOnClickListener{
@@ -66,8 +66,8 @@ class AppointmentFragment : Fragment(), ZarnClickListener {
                 showLoader(loader,"Deleting Bookings")
                 val adapter = binding.recyclerView.adapter as ZarnAdapter
                 adapter.removeAt(viewHolder.adapterPosition)
-                appointmentViewModel.delete(appointmentViewModel.liveFirebaseUser.value?.email!!,
-                    (viewHolder.itemView.tag as ZarnModel)._id)
+                appointmentViewModel.delete(appointmentViewModel.liveFirebaseUser.value?.uid!!,
+                    (viewHolder.itemView.tag as ZarnModel).uid!!)
                 hideLoader(loader)
             }
         }

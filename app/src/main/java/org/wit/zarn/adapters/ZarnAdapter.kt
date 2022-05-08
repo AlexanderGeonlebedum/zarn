@@ -39,7 +39,7 @@ class ZarnAdapter constructor(private var zarns: ArrayList<ZarnModel>,
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(zarn: ZarnModel, listener: ZarnClickListener) {
-            binding.root.tag = zarn._id
+            binding.root.tag = zarn
         binding.zarn = zarn
         binding.imageIcon.setImageResource(R.mipmap.client_icon)
         binding.root.setOnClickListener { listener.onZarnClick(zarn) }

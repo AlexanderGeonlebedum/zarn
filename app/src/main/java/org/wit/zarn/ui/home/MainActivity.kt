@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         drawerLayout = binding.drawerLayout
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+       // val toolbar = findViewById<Toolbar>(R.id.toolbar)
       //  setSupportActionBar(toolbar)
 
         val navHostFragment =

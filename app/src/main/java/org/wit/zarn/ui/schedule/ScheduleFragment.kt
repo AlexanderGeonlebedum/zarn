@@ -20,6 +20,7 @@ import org.wit.zarn.main.ZarnApp
 import org.wit.zarn.models.ZarnModel
 import org.wit.zarn.ui.appointment.AppointmentViewModel
 import org.wit.zarn.ui.auth.LoggedInViewModel
+import timber.log.Timber
 
 
 class ScheduleFragment : Fragment() {
@@ -70,7 +71,7 @@ class ScheduleFragment : Fragment() {
             true -> {
                 view?.let {
 
-                    //findNavController().popBackStack()
+                    findNavController().popBackStack()
                 }
             }
             false -> Toast.makeText(context,getString(R.string.bookingError),Toast.LENGTH_LONG).show()
@@ -95,9 +96,13 @@ class ScheduleFragment : Fragment() {
                 else if(layout.chosenAppointments.checkedRadioButtonId == R.id.MegaVolumeFullSet)"Mega Volume Full Set"
                 else if(layout.chosenAppointments.checkedRadioButtonId == R.id.TouchUps)"Touch Ups"
                 else "Removal"
-
-                scheduleViewModel.addZarn(ZarnModel(chosenAppointments = chosenAppointments,clientAddName = name.toString(),clientAddNumber = contacts,
-                    email = loggedInViewModel.liveFirebaseUser.value?.email!!))
+                Timber.i("Zarn in ScheduleFrag")
+                var zarn = ZarnModel(chosenAppointments = chosenAppointments,clientAddName = name.toString(),clientAddNumber = contacts,
+                    email = loggedInViewModel.liveFirebaseUser.value?.email!!)
+                Timber.i(zarn.toString())
+                scheduleViewModel.addZarn(loggedInViewModel.liveFirebaseUser,
+                    ZarnModel(chosenAppointments = chosenAppointments,clientAddName = name.toString(),clientAddNumber = contacts,
+                        email = loggedInViewModel.liveFirebaseUser.value?.email!!))
             }
         }
 
