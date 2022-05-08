@@ -6,8 +6,9 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -108,8 +109,8 @@ class AppointmentFragment : Fragment(), ZarnClickListener {
 
 
     override fun onZarnClick(zarn: ZarnModel) {
-//       val action = AppointmentFragmentDirections.actionAppointmentFragmentToZarnDetailFragment(zarn.id)
-//        findNavController().navigate(action)
+        val action = AppointmentFragmentDirections.actionAppointmentFragmentToScheduleDetailedFragment(zarn.uid!!)
+        findNavController().navigate(action)
     }
 
     fun setSwipeRefresh() {

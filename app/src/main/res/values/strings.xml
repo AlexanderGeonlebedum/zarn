@@ -69,4 +69,9 @@
 
     <string name="update">Update</string>
     <string name="delete">Delete</string>
+
+    <string name="editclientAddName">Client Name :</string>
+    <string name="chosenAppointments">Appointment :</string>
+    <string name="clientAddNumber">Client Number :</string>
+    <string name="message">Message :</string>
 </resources>

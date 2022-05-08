@@ -27,9 +27,22 @@
             app:destination="@id/scheduleFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"/>
-<!--        <action-->
-<!--            android:id="@+id/action_appointmentFragment_to_scheduleDetailedFragment"-->
-<!--            app:destination="@id/scheduleDetailFragment" />-->
+        <action
+            android:id="@+id/action_appointmentFragment_to_scheduleDetailedFragment"
+            app:destination="@id/scheduleDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/scheduleDetailFragment"
+        android:name="org.wit.zarn.ui.detail.ScheduleDetailFragment"
+        android:label="Schedule Detail"
+        tools:layout="@layout/fragment_schedule_detail" >
+        <action
+            android:id="@+id/action_scheduleDetailFragment_to_appointmentFragment"
+            app:destination="@id/appointmentFragment" />
+        <argument
+            android:name="zarnid"
+            app:argType="string" />
     </fragment>
 
 </navigation>
